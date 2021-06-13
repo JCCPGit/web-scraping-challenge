@@ -28,16 +28,33 @@
             <h2>Featured Mars Image</h2>
             <img src="{{ mars_data.featured_image_url }}" class="img-fluid" alt="Featured">
         </div>
-        <div class="table">
+        <div class="col-6">
             <h2>Mars Facts</h2>
-            <td>{{ mars_data.html_table }}</td>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="h5">
+                        {% for header in mars_data.facts_headers %}
+                        <th scope="col">{{ header }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in mars_data.facts_rows %} 
+                    <tr>
+                        {% for cell in row %} 
+                        <td>{{ cell }}</td>
+                        {% endfor %} 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
     <br>
     <h2>Mars Hemisphere</h2>
     <hr class="horizontal">
     <div class="row">
-       {% for x in mars_data.hemisphere_image_urls %}
+       {% for x in mars_data.hemisphere_info %}
        <div class="card col-3">
            <img src="{{ x.img_url }}" class="card-img-top" alt="Hemispheres">
            <div class="card-body">

@@ -56,6 +56,14 @@ def scrape():
     # Strip unwanted newlines to clean up the table
     html_table.replace('\n', '')
 
+    # Info for table in app
+    mars_table = tables[0]
+    facts_rows = []
+    for index, row in mars_table.iterrows():
+        facts_rows.append(row.tolist())
+    facts_headers = facts_rows[0]
+    facts_rows = facts_rows[1:]
+
     # ## Mars Hemisphere
 
     # Defining url and link
@@ -69,7 +77,7 @@ def scrape():
     soup = BeautifulSoup(html, 'html.parser')
 
     # Find all hemispheres using beautifulsoup
-    hemispheres = soup.find_all('div', class_='description')
+    hemispheres = soup.find_all('div', class_='item')
     hemispheres
 
     # Creating empty hemisphere link list
@@ -101,7 +109,8 @@ def scrape():
         "news_title":news_title,
         "news_p":news_p,
         "featured_image_url":featured_image_url,
-        "html_table":html_table,
+        "facts_headers":facts_headers,
+        "facts_rows":facts_rows,
         "hemisphere_info":hemisphere_info
     }
 
